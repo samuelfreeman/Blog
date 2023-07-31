@@ -39,6 +39,10 @@
       color: #777;
       font-weight: 300;
     }
+    nav p, nav a :hover{
+      color: #ff4343;
+      font-weight: 300;
+    }
     footer{
       color: #777;
       text-align: center;
