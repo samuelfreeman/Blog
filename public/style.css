@@ -35,6 +35,10 @@
     nav h1{
       font-size: 3em;
     }
+    nav h1 :hover{
+      color: #ff4343;
+      font-size: 3em;
+    }
     nav p, nav a{
       color: #777;
       font-weight: 300;
