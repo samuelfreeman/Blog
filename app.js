@@ -19,7 +19,7 @@ const { render }  = require('ejs');
 // requiring the blogs  route
 const blogRoutes = require('./routes/blogRoutes');
 //creating a  new variable to hold mongodb's connection string
-const dbURI= 'mongodb+srv://netninja1:%40Samuelboateng1@cluster0.kugvz7j.mongodb.net/Cluster0?retryWrites=true&w=majority'
+const dbURI= 'mongodb+srv://netninja1:samuelboateng1@cluster0.kugvz7j.mongodb.net/Cluster0'
 //connecting with mongoose to the database and listening to a request after it has completed
 mongoose.connect(dbURI)
 .then((result)=>app.listen(3000))
