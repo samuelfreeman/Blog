@@ -1,45 +1,47 @@
 // getting all express methods
-const express = require ('express');
+const express = require("express");
 
 //express app
-const app = express(); 
+const app = express();
 
 // requiring the morgan middleware
-const morgan = require('morgan');
+const morgan = require("morgan");
 
 //requiring mongoose to connect to  mongodb
-const mongoose = require('mongoose');
-
-
+const mongoose = require("mongoose");
 
 //importing the blog module created
 
-const { render }  = require('ejs');
+const { render } = require("ejs");
 
 // requiring the blogs  route
-const blogRoutes = require('./routes/blogRoutes');
+const blogRoutes = require("./routes/blogRoutes");
 //creating a  new variable to hold mongodb's connection string
-const dbURI= 'mongodb+srv://netninja1:<password>@cluster0.kugvz7j.mongodb.net/Cluster0'
+const dbURI =
+  "mongodb+srv://netninja1:0912@cluster0.kugvz7j.mongodb.net/Cluster0";
 //connecting with mongoose to the database and listening to a request after it has completed
-mongoose.connect(dbURI)
-.then((result)=>app.listen(3000))
-.catch((err)=>{console.log(err)})
+mongoose
+  .connect(dbURI)
+  .then((result) => app.listen(3000))
+  .catch((err) => {
+    console.log(err);
+  });
 //rejister view eingine
-app.set('view engine','ejs');
+app.set("view engine", "ejs");
 
 // listen for a request
 console.log("connected");
 
 //middleware and static
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended:true }));
-app.use(morgan('dev'));
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 //mongoose and mongo sandbox routes then delete it
 // app.get('/add-blog',(req,res)=>{
 // const blog = new Blog({
 //     title:'new blog',
 //     snippet: 'about my new blog',
-//     body:'more about my new blog' 
+//     body:'more about my new blog'
 // })
 // blog.save()
 // .then((result)=>{
@@ -80,38 +82,32 @@ app.use(morgan('dev'));
 // })
 
 // app.use((req,res,next)=>{
-//     console.log('in the next middleware'); 
-    
+//     console.log('in the next middleware');
+
 //     next();
 //     })
 
-
-
-
 //getting  route.
-app.get('/',(req,res) =>{ 
-// // res.send('<p>homepage</p>');
-// const blogs =[
-//     {title: 'yoshi finds eggs ' , snippet:'lorem ipsum dolor sit amet consectetur'},
-//     {title: 'mario finds stars ' , snippet:'lorem ipsum dolor sit amet consectetur'},
-//     {title: 'how to defeat bowser ' , snippet:'lorem ipsum dolor sit amet consectetur'},
-// ]
-// res.render('index' , {title : 'home',blogs})
- res.redirect('/blogs');
+app.get("/", (req, res) => {
+  // // res.send('<p>homepage</p>');
+  // const blogs =[
+  //     {title: 'yoshi finds eggs ' , snippet:'lorem ipsum dolor sit amet consectetur'},
+  //     {title: 'mario finds stars ' , snippet:'lorem ipsum dolor sit amet consectetur'},
+  //     {title: 'how to defeat bowser ' , snippet:'lorem ipsum dolor sit amet consectetur'},
+  // ]
+  // res.render('index' , {title : 'home',blogs})
+  res.redirect("/blogs");
 });
 
-app.get('/about',(req,res) =>{ 
-    // res.send('<p>aboutpage</p>');
-    res.render('about', {title : 'about'});
-    });
-   
-    // blog routes
-    app.use('/blogs',blogRoutes);
+app.get("/about", (req, res) => {
+  // res.send('<p>aboutpage</p>');
+  res.render("about", { title: "about" });
+});
 
-   
+// blog routes
+app.use("/blogs", blogRoutes);
+
 //404 page
-    app.use((req,res)=>{
-res.status(404).render(404, {title : '404 not found '})
+app.use((req, res) => {
+  res.status(404).render(404, { title: "404 not found " });
 });
-
-    
